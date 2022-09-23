@@ -1,0 +1,45 @@
+.dotFalse {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: rgb(7, 213, 41);
+    display: inline-block;
+}
+  
+.dotTrue {
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background-color: rgb(207, 9, 9);
+    display: inline-block;
+}
+
+.details {
+    color: rgba(123, 122, 122, 0.889);
+    text-align: center;
+    font-family: helvetica, sans-serif;
+}
+
+.mat-expansion-panel-header-title {
+    font-family: helvetica, sans-serif;
+}
+
+.mat-expansion-panel-header-description {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.column1 {
+    float: left;
+    width: 40%;
+}
+
+.column2 {
+    float: right;
+    width: 50%;
+}
+
+#map {
+    height: 550px;
+    width: 750px;
+}
