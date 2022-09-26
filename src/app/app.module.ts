@@ -7,15 +7,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {ScrollingModule} from '@angular/cdk/scrolling'; 
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
-import { UserComponent } from './user/user.component'; 
+import { UserComponent } from './user/user.component';
+import { MaintainerComponent } from './maintainer/maintainer.component';
+import { AppRoutingModule } from './app-routing.module'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    MaintainerComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,9 @@ import { UserComponent } from './user/user.component';
     MatExpansionModule,
     MatButtonModule,
     MatIconModule,
-    LeafletModule
+    LeafletModule,
+    AppRoutingModule,
+    ScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

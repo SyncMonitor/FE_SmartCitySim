@@ -3,16 +3,16 @@
     <cdk-virtual-scroll-viewport itemSize="50" class="barra">
         <mat-expansion-panel (opened)="panelOpenState = true"
                             (closed)="panelOpenState = false" *ngFor="let group of grouped | keyvalue">
-   
+
         <mat-expansion-panel-header>
            <mat-panel-title>
-             {{group.key}}
+             {{ group.key }}
            </mat-panel-title>
            <mat-panel-description>
-             <mat-icon>map</mat-icon>
+             <mat-icon>account_circle</mat-icon>
            </mat-panel-description>
         </mat-expansion-panel-header>
-   
+ 
         <mat-accordion>
            <mat-expansion-panel (opened)="panelOpenState = true"
                                 (closed)="panelOpenState = false" *ngFor="let item of $any(group).value">
@@ -21,16 +21,21 @@
                  <mat-panel-title>
                    Sensore: {{ item.name }}
                  </mat-panel-title>
-                 <mat-panel-description>
-                   <span *ngIf="!item.parkingArea[0].value" class="dotFalse"></span>
-                   <span *ngIf="item.parkingArea[0].value" class="dotTrue"></span>
+                 <mat-panel-description class="sensorDesc">
+                   <div class="descAddress">{{item.parkingArea[0].address}}</div>
+                   <div *ngIf="!item.maintainer[0].toBeRepaired" class="greenText2">Funzionante</div>
+                   <div *ngIf="item.maintainer[0].toBeRepaired" class="redText2">Danneggiato</div>
+                   <div *ngIf="!item.maintainer[0].toBeCharged" class="greenText1">Carico</div>
+                   <div *ngIf="item.maintainer[0].toBeCharged" class="redText1">Da caricare</div>
                  </mat-panel-description>   
              </mat-expansion-panel-header>
    
              <p class="details">
                  Latitudine: {{item.parkingArea[0].latitude}}<br>
-                 Longitudine: {{item.parkingArea[0].longitude}}
-             </p>                        
+                 Longitudine: {{item.parkingArea[0].longitude}}<br>
+                 Batteria: {{item.battery}}<br>
+                 Carica batteria: {{item.charge}}<br> 
+             </p>
          
            </mat-expansion-panel>
         </mat-accordion>
@@ -41,12 +46,12 @@
 </div>
 
 <div class="column2"> 
-  <div id="map">
+  <div id="map2">
   </div>
 </div>
 
 <div class="buttonPos">
 <button mat-raised-button color="primary">
-  <a routerLink="/maintainer" class="button">Visualizza come manutentore</a>
+  <a routerLink="/user" class="button">Visualizza come utente</a>
 </button>
 </div>

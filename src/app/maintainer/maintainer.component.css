@@ -1,19 +1,3 @@
-.dotFalse {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background-color: rgb(7, 213, 41);
-    display: inline-block;
-}
-  
-.dotTrue {
-    height: 12px;
-    width: 12px;
-    border-radius: 50%;
-    background-color: rgb(207, 9, 9);
-    display: inline-block;
-}
-
 .details {
     color: rgb(110, 110, 110);
     font-family: helvetica, sans-serif;
@@ -24,18 +8,18 @@
     font-family: helvetica, sans-serif;
 }
 
+.mat-expansion-panel {
+    background-color: rgb(246, 246, 246);
+}
+
 .mat-expansion-panel-header-description {
     display: flex;
     justify-content: flex-end;
 }
 
-.mat-expansion-panel {
-    background-color: rgb(246, 246, 246);
-}
-
 .column1 {
     float: left;
-    width: 40%;
+    width: 47%;
 }
 
 .column2 {
@@ -43,7 +27,7 @@
     width: 50%;
 }
 
-#map {
+#map2 {
     height: 550px;
     width: 750px;
 }
@@ -56,6 +40,29 @@
 .buttonPos {
     position: absolute;
     top: 20px; right: 40px;
+}
+
+.redText1 {
+    color:rgb(207, 9, 9);
+}
+
+.greenText1 {
+    color:rgb(7, 213, 41);
+}
+
+.redText2 {
+    color:rgb(207, 9, 9);
+    margin-right: 30px;
+}
+
+.greenText2 {
+    color:rgb(7, 213, 41);
+    margin-right: 30px;
+}
+
+.descAddress {
+    color: rgb(110, 110, 110);
+    margin-right: 50px;
 }
 
 .barra {
