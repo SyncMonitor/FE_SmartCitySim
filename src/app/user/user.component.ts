@@ -1,21 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import SensorData from 'src/assets/json/getAllSensorData.json';
+import { SENSORS } from '../sensor.service';
+import { SensorService } from '../sensor.service';
 import * as Leaflet from 'leaflet';
-
-interface SENSORS {
-  id: number;
-  name: string;
-  battery: string;
-  parkingArea: PA[];
-}
-
-interface PA {
-  latitude: string;
-  longitude: string;
-  address: string;
-  value: boolean;
-}
 
 @Component({
   selector: 'app-user',
@@ -26,7 +13,7 @@ export class UserComponent implements OnInit {
 
   map: Leaflet.Map = {} as any;
   panelOpenState = false;
-  sensors: SENSORS[] = SensorData;
+  sensors: SENSORS[] = [];
   redIcon = Leaflet.icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -45,9 +32,9 @@ export class UserComponent implements OnInit {
   });
   markers: any[] = [];
   info: string = "";
+  grouped: any[] = [];
   
-  constructor(){
-  }
+  constructor(private sensorService: SensorService) {}
 
   ngOnInit(): void {
     this.map = Leaflet.map("map").setView([45.406435, 11.876761], 12);
@@ -55,24 +42,33 @@ export class UserComponent implements OnInit {
       maxZoom: 21,
       subdomains:['mt0','mt1','mt2','mt3']
     }).addTo(this.map);
-    for (let i = 0; i <= this.sensors.length; ++i) {
-      if (this.sensors[i].parkingArea[0].value){
-        this.markers[i] = Leaflet.marker([parseFloat(this.sensors[i].parkingArea[0].latitude), 
-                                        parseFloat(this.sensors[i].parkingArea[0].longitude)], {icon: this.redIcon}).addTo(this.map);}
-      else {
-        this.markers[i] = Leaflet.marker([parseFloat(this.sensors[i].parkingArea[0].latitude), 
-        parseFloat(this.sensors[i].parkingArea[0].longitude)], {icon: this.greenIcon}).addTo(this.map);}
-      this.markers[i].bindPopup(this.getInfo(this.sensors[i]), {closeButton: false});                                                                                           
-    }
-  }
 
-  grouped = SensorData.reduce((group : any, current)=> {
-    const groupingKey = `${current.parkingArea[0].address}`;
-    group[groupingKey]= group[groupingKey] || [];
-    group[groupingKey].push(current);
-    return group;
-    }, {}
-  )
+    this.sensorService
+      .getSensorData()
+      .subscribe(data => {
+        this.sensors = data;
+        for (let i = 0; i <= this.sensors.length; ++i) {
+          if (this.sensors[i].parkingArea[0].value){
+            this.markers[i] = Leaflet.marker([parseFloat(this.sensors[i].parkingArea[0].latitude), 
+                                              parseFloat(this.sensors[i].parkingArea[0].longitude)], {icon: this.redIcon}).addTo(this.map);}
+          else {
+            this.markers[i] = Leaflet.marker([parseFloat(this.sensors[i].parkingArea[0].latitude), 
+                                              parseFloat(this.sensors[i].parkingArea[0].longitude)], {icon: this.greenIcon}).addTo(this.map);}
+          this.markers[i].bindPopup(this.getInfo(this.sensors[i]), {closeButton: false});                                                                                           
+        }
+      });
+
+    this.sensorService
+      .getSensorData()
+      .subscribe(data => {
+        this.sensors = data;
+        this.grouped = this.sensors.reduce((group : any, current)=> {
+        const groupingKey = `${current.parkingArea[0].address}`;
+        group[groupingKey]= group[groupingKey] || [];
+        group[groupingKey].push(current);
+        return group;}, {})
+      });
+  }
 
   getInfo (sensor: SENSORS) {
     this.info = sensor.parkingArea[0].address + "<br>" + "Sensore " + sensor.name;

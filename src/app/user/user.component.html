@@ -1,4 +1,10 @@
-<div class="column1"> 
+<div class="container">
+<div class="leafletmap"> 
+    <div id="map">
+    </div>
+</div>
+
+<div class="lista"><p class="desc1">Sensori di parcheggio</p>
     <mat-accordion class="panel">
     <cdk-virtual-scroll-viewport itemSize="50" class="barra">
         <mat-expansion-panel (opened)="panelOpenState = true"
@@ -15,7 +21,7 @@
    
         <mat-accordion>
            <mat-expansion-panel (opened)="panelOpenState = true"
-                                (closed)="panelOpenState = false" *ngFor="let item of $any(group).value">
+                                (closed)="panelOpenState = false" *ngFor="let item of group.value">
    
              <mat-expansion-panel-header (click)="showMarker(item)">
                  <mat-panel-title>
@@ -39,14 +45,53 @@
     </cdk-virtual-scroll-viewport>
     </mat-accordion>
 </div>
-
-<div class="column2"> 
-  <div id="map">
-  </div>
 </div>
 
-<div class="buttonPos">
-<button mat-raised-button color="primary">
-  <a routerLink="/maintainer" class="button">Visualizza come manutentore</a>
-</button>
+<div class="footer"><p class="desc2">Team di sviluppo</p>
+<table class="zui-table">
+      <thead>
+          <tr>
+              <th>Team</th>
+              <th>Position</th>
+              <th>Url</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Ing. Pallaro Fabio</td>
+              <td>Project Manager</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Ing. Zorzi Daniele</td>
+              <td>Team leader</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Manuel Barbato</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Luca Busacca</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Andrea Volpe</td>
+              <td>Developer</td>
+              <td>https://github.com/avolpe1998</td>
+          </tr>
+          <tr>
+              <td>Andrej Danciu</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+            <tr>
+              <td>Alberto Matterazzo</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+      </tbody>
+  </table>
 </div>

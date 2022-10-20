@@ -1,21 +1,8 @@
-<div class="column1"> 
-    <mat-accordion class="panel">
-    <cdk-virtual-scroll-viewport itemSize="50" class="barra">
-        <mat-expansion-panel (opened)="panelOpenState = true"
-                            (closed)="panelOpenState = false" *ngFor="let group of grouped | keyvalue">
-
-        <mat-expansion-panel-header>
-           <mat-panel-title>
-             {{ group.key }}
-           </mat-panel-title>
-           <mat-panel-description>
-             <mat-icon>account_circle</mat-icon>
-           </mat-panel-description>
-        </mat-expansion-panel-header>
- 
+<div class="column1">
         <mat-accordion>
+        <cdk-virtual-scroll-viewport itemSize="50" class="barra">
            <mat-expansion-panel (opened)="panelOpenState = true"
-                                (closed)="panelOpenState = false" *ngFor="let item of $any(group).value">
+                                (closed)="panelOpenState = false" *ngFor="let item of sensorsTemp">
    
              <mat-expansion-panel-header (click)="showMarker(item)">
                  <mat-panel-title>
@@ -38,11 +25,8 @@
              </p>
          
            </mat-expansion-panel>
+        </cdk-virtual-scroll-viewport>
         </mat-accordion>
-   
-        </mat-expansion-panel>
-    </cdk-virtual-scroll-viewport>
-    </mat-accordion>
 </div>
 
 <div class="column2"> 
@@ -50,8 +34,57 @@
   </div>
 </div>
 
-<div class="buttonPos">
+<div class="buttonPos"> <!-- DA CAMBIARE STILE E POSIZIONE -->
 <button mat-raised-button color="primary">
-  <a routerLink="/user" class="button">Visualizza come utente</a>
+  <a (click)="logout()" class="button">Esci</a>
 </button>
 </div>
+
+<footer class="footer">
+<table class="zui-table">
+      <thead>
+          <tr>
+              <th>Team</th>
+              <th>Position</th>
+              <th>Url</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>Ing. Pallaro Fabio</td>
+              <td>Project Manager</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Ing. Zorzi Daniele</td>
+              <td>Team leader</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Manuel Barbato</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Luca Busacca</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+          <tr>
+              <td>Andrea Volpe</td>
+              <td>Developer</td>
+              <td>https://github.com/avolpe1998</td>
+          </tr>
+          <tr>
+              <td>Andrej Danciu</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+            <tr>
+              <td>Alberto Matterazzo</td>
+              <td>Developer</td>
+              <td></td>
+          </tr>
+      </tbody>
+  </table>
+  </footer>

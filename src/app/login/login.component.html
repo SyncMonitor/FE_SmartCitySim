@@ -1,0 +1,13 @@
+<div class="login">
+    <div>
+          <form  [formGroup]="loginForm" (ngSubmit)="login()">
+            <div>
+              <input formControlName="email" placeholder="email">
+            </div><br>
+            <button>Accedi</button><br>
+            <mat-error *ngIf="isSubmitted && loginSuccess==2">
+                Indirizzo email non valido
+            </mat-error>
+          </form>
+      </div>
+</div>

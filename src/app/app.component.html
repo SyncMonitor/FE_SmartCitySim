@@ -1,4 +1,11 @@
-<div id="header">
-    <a routerLink="/user" class="title">{{ title }}</a>
+<div class="logoContainer">
+    <div class="logo">
+        <img src="assets/synclab_logo_blue.svg" 
+             width="100%" height="100%" style="text-align: center;" />
+    </div>
 </div>
+<div routerLink="/user" class="title">
+    {{ title }}
+</div>
+
 <router-outlet></router-outlet>

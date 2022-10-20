@@ -1,33 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import SensorData from 'src/assets/json/getAllSensorData.json';
+import { SENSORS } from '../sensor.service';
+import { SensorService } from '../sensor.service';
+import { AuthService } from '../auth.service';
 import * as Leaflet from 'leaflet';
-
-interface SENSORS {
-  id: number;
-  name: string;
-  battery: string;
-  charge: string;
-  parkingArea: PA[];
-  maintainer: M[];
-}
-
-interface PA {
-  latitude: string;
-  longitude: string;
-  address: string;
-  value: boolean;
-}
-
-interface M {
-  ownerName: string;
-  ownerSurname: string;
-  company: string;
-  phoneNumber: any;
-  mail: string;
-  toBeRepaired: boolean;
-  toBeCharged: boolean;
-}
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maintainer',
@@ -38,7 +15,7 @@ export class MaintainerComponent implements OnInit {
 
   map: Leaflet.Map = {} as any;
   panelOpenState = false;
-  sensors: SENSORS[] = SensorData;
+  sensors: SENSORS[] = [];
   blueIcon = Leaflet.icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -48,31 +25,53 @@ export class MaintainerComponent implements OnInit {
     shadowSize: [41, 41]
   });
   markers: any[] = [];
+
+  /* VARIABILI TEMPORANEE */
+  sensorsTemp: SENSORS[] = [];
   info: string = "";
+  c: number = 0;
+  k: number = 0;
+  currentUser: string | undefined;
   
-  constructor(){
+  constructor(private sensorService: SensorService, private authService: AuthService, private router: Router){
   }
 
   ngOnInit(): void {
     this.map = Leaflet.map("map2").setView([45.406435, 11.876761], 12);
-    Leaflet.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
-      maxZoom: 21,
-      subdomains:['mt0','mt1','mt2','mt3']
+        Leaflet.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+          maxZoom: 21,
+          subdomains:['mt0','mt1','mt2','mt3']
     }).addTo(this.map);
-    for (let i = 0; i <= this.sensors.length; ++i) {
-      this.markers[i] = Leaflet.marker([parseFloat(this.sensors[i].parkingArea[0].latitude), 
-                                        parseFloat(this.sensors[i].parkingArea[0].longitude)], {icon: this.blueIcon}).addTo(this.map);
-      this.markers[i].bindPopup(this.getInfo(this.sensors[i]), {closeButton: false});                                                                                          
-    }
-  }
+    this.currentUser = this.authService.getUser();
 
-  grouped = SensorData.reduce((group : any, current)=> {
-    const groupingKey = `${current.maintainer[0].ownerName + " " + current.maintainer[0].ownerSurname }`;
-    group[groupingKey]= group[groupingKey] || [];
-    group[groupingKey].push(current);
-    return group;
-    }, {}
-  )
+
+     this.sensorService
+      .getSensorData()
+      .subscribe(data => {
+        this.sensors = data;
+        for (let i = 0; i <= this.sensors.length; ++i) {
+          if (this.sensors[i].maintainer[0].mail == this.currentUser) {
+            this.markers[this.c] = Leaflet.marker([parseFloat(this.sensors[i].parkingArea[0].latitude), 
+                                                   parseFloat(this.sensors[i].parkingArea[0].longitude)], {icon: this.blueIcon}).addTo(this.map);
+            this.markers[this.c].bindPopup(this.getInfo(this.sensors[i]), {closeButton: false}); 
+            this.c = this.c + 1;
+          }                                                                                                 
+        }
+        console.log(this.markers);
+      });
+    
+     this.sensorService
+      .getSensorData()
+      .subscribe(data => {
+        for (let j = 0; j <= data.length; ++j) {
+          if (data[j].maintainer[0].mail == this.currentUser) {
+            this.sensorsTemp[this.k] = data[j];
+            this.k=this.k+1;
+          }
+        }
+      });
+
+  }
 
   getInfo (sensor: SENSORS) {
     this.info = sensor.parkingArea[0].address + "<br>" + "Sensore " + sensor.name;
@@ -88,4 +87,11 @@ export class MaintainerComponent implements OnInit {
     }
   }
 
+  logout(): void {
+    this.authService.logout();
+    this.router.navigateByUrl("/login");
+  }
+
+  ngOnDestroy() {
+  }
 }
