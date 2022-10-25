@@ -25,16 +25,17 @@ export class MaintainerComponent implements OnInit {
     shadowSize: [41, 41]
   });
   markers: any[] = [];
-
-  /* VARIABILI TEMPORANEE */
   sensorsTemp: SENSORS[] = [];
   info: string = "";
   c: number = 0;
   k: number = 0;
   currentUser: string | undefined;
+  phoneNumber: string | undefined;
+  company: string | undefined;
+  ownerName: string | undefined;
+  ownerSurname: string | undefined;
   
-  constructor(private sensorService: SensorService, private authService: AuthService, private router: Router){
-  }
+  constructor(private sensorService: SensorService, private authService: AuthService, private router: Router){}
 
   ngOnInit(): void {
     this.map = Leaflet.map("map2").setView([45.406435, 11.876761], 12);
@@ -42,8 +43,22 @@ export class MaintainerComponent implements OnInit {
           maxZoom: 21,
           subdomains:['mt0','mt1','mt2','mt3']
     }).addTo(this.map);
-    this.currentUser = this.authService.getUser();
+    const value = localStorage.getItem('token');
+    if (value) {this.currentUser=value};
 
+    this.sensorService
+      .getSensorData()
+      .subscribe(data => {
+        for (let i = 0; i <= data.length; ++i) {
+          if (data[i].maintainer[0].mail == this.currentUser) {
+            this.ownerName = data[i].maintainer[0].ownerName;
+            this.ownerSurname = data[i].maintainer[0].ownerSurname;
+            this.company = data[i].maintainer[0].company;
+            this.phoneNumber = data[i].maintainer[0].phoneNumber;
+            break;
+          }
+        }
+      });
 
      this.sensorService
       .getSensorData()
@@ -90,8 +105,5 @@ export class MaintainerComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.router.navigateByUrl("/login");
-  }
-
-  ngOnDestroy() {
   }
 }

@@ -1,4 +1,15 @@
-<div class="column1">
+<div class="leafletmap"> 
+    <div id="map2">
+    </div>
+</div>
+
+<div class="desc1">
+    Benvenuto {{ownerName}} {{ownerSurname}}<br>
+    {{company}}<br>
+    Tel. {{phoneNumber}}<br>
+    <a (click)="logout()" class="logout"><u>Esci</u></a><br>
+</div>
+<div class="lista">
         <mat-accordion>
         <cdk-virtual-scroll-viewport itemSize="50" class="barra">
            <mat-expansion-panel (opened)="panelOpenState = true"
@@ -13,7 +24,7 @@
                    <div *ngIf="!item.maintainer[0].toBeRepaired" class="greenText2">Funzionante</div>
                    <div *ngIf="item.maintainer[0].toBeRepaired" class="redText2">Danneggiato</div>
                    <div *ngIf="!item.maintainer[0].toBeCharged" class="greenText1">Carico</div>
-                   <div *ngIf="item.maintainer[0].toBeCharged" class="redText1">Da caricare</div>
+                   <div *ngIf="item.maintainer[0].toBeCharged" class="redText1">Scarico</div>
                  </mat-panel-description>   
              </mat-expansion-panel-header>
    
@@ -29,18 +40,8 @@
         </mat-accordion>
 </div>
 
-<div class="column2"> 
-  <div id="map2">
-  </div>
-</div>
-
-<div class="buttonPos"> <!-- DA CAMBIARE STILE E POSIZIONE -->
-<button mat-raised-button color="primary">
-  <a (click)="logout()" class="button">Esci</a>
-</button>
-</div>
-
-<footer class="footer">
+<div class="desc2">Team di sviluppo</div>
+<div class="footer">
 <table class="zui-table">
       <thead>
           <tr>
@@ -87,4 +88,4 @@
           </tr>
       </tbody>
   </table>
-  </footer>
+</div>

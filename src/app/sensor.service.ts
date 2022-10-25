@@ -35,11 +35,7 @@ export class SensorService {
 
   private url = 'assets/getAllSensorData.json';
 
-  constructor(private http: HttpClient) {
-    this.getSensorData().subscribe(data => {
-      console.log(data);
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   getSensorData(): Observable<SENSORS[]> {
     return this.http.get<SENSORS[]>(this.url);

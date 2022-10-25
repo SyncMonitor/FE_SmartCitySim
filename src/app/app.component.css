@@ -4,6 +4,7 @@
     font-family: monospace;
     text-align: center !important;
     margin-bottom: 1%;
+    cursor: pointer;
 }
 
 .logo {

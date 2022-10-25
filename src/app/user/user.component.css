@@ -25,6 +25,10 @@ html, body {
     padding-left: 40%;
 }
 
+.mat-expansion-panel {
+    background-color: #DDEEEE;
+}
+
 .mat-expansion-panel-header-title {
     font-family: helvetica, sans-serif;
 }
@@ -32,19 +36,6 @@ html, body {
 .mat-expansion-panel-header-description {
     display: flex;
     justify-content: flex-end;
-}
-
-.mat-expansion-panel {
-    background-color: #DDEEEE;
-}
-
-#map {
-    height: 100%;
-    width: 100%;
-}
-
-.barra {
-    height: 90%;
 }
 
 .zui-table {
@@ -55,14 +46,12 @@ html, body {
     text-align:center;
     margin-left: auto;
     margin-right: auto;
-    
 }
 .zui-table thead th {
     background-color: #DDEFEF;
     border: solid 1px #DDEEEE;
     color: #336B6B;
     padding: 10px;
-    text-align: left;
     text-shadow: 1px 1px 1px #fff;
     text-align:center;
 }
@@ -74,88 +63,97 @@ html, body {
     text-align:center;
 }
 
-.footer {
-    margin-top: 3%;
+.leafletmap {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    height: 80%;
+    width: 100%;
+    margin-bottom: 1%;
 }
 
-.leafletmap {
+#map {
     height: 100%;
-    width: 50%;
-    float: right;
+    width: 100%;
 }
 
 .lista {
     border: 0;
-    border-style: outset;
+    border-style: solid;
     border-width: thin;
+    padding: 0.5%;
+    height: 50%;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 1%;
+}
+
+.barra {
     height: 100%;
-    width: 45%;
-    float: left;
 }
 
-.lista:hover {
-    box-shadow:
-    1px 1px rgb(162, 162, 162),
-    2px 2px rgb(162, 162, 162),
-    3px 3px rgb(162, 162, 162),
-    4px 4px rgb(162, 162, 162),
-    5px 5px rgb(162, 162, 162),
-    6px 6px rgb(162, 162, 162);
-    -webkit-transform: translateX(3px);
-    transform: translateX(3px);
-    transition: .5s ease;
-}
-
-.container {
-    width: 98%;
-    height: 70%;
+.footer {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5%;
+    width: 50%;
+    margin: auto;
 }
 
 .desc1 {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5%;
+    width: 50%;
     text-align: center;
+    margin: auto;
     font-family: helvetica, sans-serif;
+    border-bottom: none;
 }
 
 .desc2 {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5%;
+    width: 50%;
     text-align: center;
+    margin: auto;
     font-family: helvetica, sans-serif;
+    border-bottom: none;
 }
 
 @media screen and (max-width: 1079px) {
+
+.leafletmap {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    height: 70%;
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+.lista {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5%;
+    height: 30%;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 1%;
+}
+
 .footer {
     border: 0;
     border-style: solid;
     border-width: thin;
     padding: 0.5%;
-    margin-top: 3%;
-}
-
-.container {
-    display: flex; 
-    flex-flow: column;
     width: 100%;
-    height: 100%;
-}
-
-.leafletmap {
-    order: 1;
-    border: 0;
-    border-style: solid;
-    border-width: thin;
-    padding: 0.5%;
-    height: 65%;
-    width: 100%;
-    margin-bottom: 2%;
-}
-
-.lista {
-    order: 2;
-    border: 0;
-    border-style: solid;
-    border-width: thin;
-    padding: 0.5%;
-    height: 40%;
-    width: 100%;
+    margin: auto;
 }
 
 .mat-expansion-panel-header-title {
@@ -177,18 +175,33 @@ html, body {
 }
 
 .desc1 {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5%;
+    width: 100%;
     text-align: center;
+    margin: auto;
     font-family: helvetica, sans-serif;
     font-size: 0.8em;
+    border-bottom: none;
 }
 
 .desc2 {
+    border: 0;
+    border-style: solid;
+    border-width: thin;
+    padding: 0.5%;
+    width: 100%;
     text-align: center;
+    margin: auto;
     font-family: helvetica, sans-serif;
     font-size: 0.8em;
+    border-bottom: none;
 }
 
 .zui-table {
     font-size: 70%;
 }
+
 }

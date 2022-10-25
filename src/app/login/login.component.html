@@ -1,13 +1,15 @@
-<div class="login">
-    <div>
+<div class="container">
+    <div class="desc">
+      <div class="title">Login</div>
+      Per accedere alla pagina riservata ai manutentori inserisci la tua email
+    </div>
+    <div class="login">
           <form  [formGroup]="loginForm" (ngSubmit)="login()">
-            <div>
-              <input formControlName="email" placeholder="email">
-            </div><br>
-            <button>Accedi</button><br>
-            <mat-error *ngIf="isSubmitted && loginSuccess==2">
-                Indirizzo email non valido
-            </mat-error>
+            <mat-error *ngIf="control==false">
+              Indirizzo email non valido
+            </mat-error><br>
+            <input formControlName="email" placeholder="email.." class="box"><br>
+            <button mat-raised-button class="button" color="primary">Accedi</button>
           </form>
-      </div>
+    </div>
 </div>
