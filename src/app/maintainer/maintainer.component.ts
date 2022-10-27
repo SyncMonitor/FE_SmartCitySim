@@ -89,7 +89,7 @@ export class MaintainerComponent implements OnInit {
   }
 
   getInfo (sensor: SENSORS) {
-    this.info = sensor.parkingArea[0].address + "<br>" + "Sensore " + sensor.name;
+    this.info = sensor.parkingArea[0].address + "<br>" + "Sensore: " + sensor.name;
     return this.info;
   }
 

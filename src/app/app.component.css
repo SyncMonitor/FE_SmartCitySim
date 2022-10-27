@@ -3,6 +3,7 @@
     font-size: 4em !important;
     font-family: monospace;
     text-align: center !important;
+    font-weight: bold;
     margin-bottom: 1%;
     cursor: pointer;
 }
@@ -19,6 +20,7 @@
         font-size: 200% !important;
         font-family: monospace;
         text-align: center !important;
+        font-weight: bold;
         margin-bottom: 1%;
     }
 

@@ -30,7 +30,16 @@ export class UserComponent implements OnInit {
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
   });
+  yellowIcon = Leaflet.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
   markers: any[] = [];
+  markerAmb: any;
   info: string = "";
   grouped: any[] = [];
   
@@ -57,6 +66,9 @@ export class UserComponent implements OnInit {
           this.markers[i].bindPopup(this.getInfo(this.sensors[i]), {closeButton: false});                                                                                           
         }
       });
+    
+    this.markerAmb = Leaflet.marker([45.38865,11.92834], {icon: this.yellowIcon}).addTo(this.map);
+    this.markerAmb.bindPopup(this.getInfoAmb(), {closeButton: false});
 
     this.sensorService
       .getSensorData()
@@ -71,11 +83,17 @@ export class UserComponent implements OnInit {
   }
 
   getInfo (sensor: SENSORS) {
-    this.info = sensor.parkingArea[0].address + "<br>" + "Sensore " + sensor.name;
+    this.info = sensor.parkingArea[0].address + "<br>";
     if (sensor.parkingArea[0].value){
-      this.info = this.info + ": occupato";}
+      this.info = this.info + "Parcheggio: occupato" + "<br>";}
     else{
-      this.info = this.info + ": libero";}
+      this.info = this.info + "Parcheggio: libero" + "<br>";}
+    this.info = this.info + "Sensore: " + sensor.name;
+    return this.info;
+  }
+
+  getInfoAmb () {
+    this.info = "Padova Galleria Spagna <br> Sensore Ambientale <br> <a href='https://syncmonitor.altervista.org/' target='_blank'>Visualizza</a>";
     return this.info;
   }
 
@@ -86,5 +104,10 @@ export class UserComponent implements OnInit {
           this.markers[j].getLatLng().lng == parseFloat(item.parkingArea[0].longitude)) {
             this.markers[j].openPopup();}
     }
+  }
+
+  showMarkerAmb() {
+    this.map.setView([45.38865,11.92834], 21);
+    this.markerAmb.openPopup();
   }
 }
