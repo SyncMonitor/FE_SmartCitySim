@@ -3,6 +3,11 @@ html, body {
     width: 100%;
 }
 
+.subtitle {
+    text-align: center;
+    margin-bottom: 3%;
+}
+
 .dotFalse {
     height: 12px;
     width: 12px;
@@ -83,11 +88,32 @@ html, body {
     width: 50%;
     cursor: pointer;
 }
+.column1:hover {
+    background-color: #DDEEEE;
+}
 .column2 {
     text-align: center;
     width: 50%;
 }
 
+.legend {
+    margin-bottom: 1%;
+}
+
+.legend-table {
+    border: solid 2px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: helvetica, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 30%;
+}
+
+.legend-table tbody td {
+    border: solid 2px #DDEEEE;
+}
 
 .leafletmap {
     border: 0;
@@ -256,4 +282,27 @@ html, body {
     font-size: 70%;
 }
 
+.legend {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.legend-table {
+    border: solid 2px #DDEEEE;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: helvetica, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 95%;
+    font-size: 0.8em;
+}
+
+.subtitle {
+    margin: auto;
+    margin-bottom: 5%;
+    font-size: 0.8em;
+    width: 95%;
+}
 }

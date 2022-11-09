@@ -30,14 +30,15 @@ export class UserComponent implements OnInit {
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
   });
-  yellowIcon = Leaflet.icon({
-    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+  ambIcon = Leaflet.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [25, 41],
+    iconSize: [35, 50],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
   });
+
   markers: any[] = [];
   markerAmb: any;
   info: string = "";
@@ -67,7 +68,7 @@ export class UserComponent implements OnInit {
         }
       });
     
-    this.markerAmb = Leaflet.marker([45.38865,11.92834], {icon: this.yellowIcon}).addTo(this.map);
+    this.markerAmb = Leaflet.marker([45.38865,11.92834], {icon: this.ambIcon}).addTo(this.map);
     this.markerAmb.bindPopup(this.getInfoAmb(), {closeButton: false});
 
     this.sensorService
@@ -107,7 +108,7 @@ export class UserComponent implements OnInit {
   }
 
   showMarkerAmb() {
-    this.map.setView([45.38865,11.92834], 21);
+    this.map.setView([45.38865,11.92834], 19);
     this.markerAmb.openPopup();
   }
 }
